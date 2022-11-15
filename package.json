@@ -1,0 +1,15 @@
+{
+  "name": "tomcat-validate-nginx",
+  "version": "1.0.0",
+  "description": "Tomcat http validate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@10.19.249.1:/home/git/tomcat-validate.git"
+  },
+  "author": "luis garcia",
+  "license": "ISC"
+}

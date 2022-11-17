@@ -22,7 +22,7 @@ function main() {
         if (type === "Tomcat"){
             if(await balancer.stateTomcat(host_int)) {
                 const tomcat = new Tomcat(server);
-                //tomcat.restartService();
+                tomcat.restartService();
                 //console.log(`Reiniciar ${name}`);
                 writeLog(name);
             }
@@ -32,6 +32,6 @@ function main() {
 }
 
 
+    main();
 
-main();
 

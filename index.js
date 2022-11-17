@@ -1,21 +1,37 @@
 const  servers  = require('./config/server');
+const Balancer = require('./helpers/balancer');
 const Tomcat = require('./helpers/tomcat');
+const fs = require('fs');
 
-//const tomcat = new Tomcat(server[1]);
+function writeLog(serverName){
+    const PATH = '/var/log/tomcat-validate/IWS-Tomcat.log';
+    let fecha = new Date();
+    let message=`${fecha} se reincio el: ${serverName}\n`;
+    fs.appendFile(PATH, message, (err) => {
+        if (err) throw err;
+        console.log('The "data to append" was appended to file!');
+      });
+}
 
 function main() {
-    const tomcat = new Tomcat(servers[0]);
+    const balancer = new Balancer(servers[0]);
 
     servers.forEach(async server => {
-        if (server.type === "Tomcat"){
-            if(await tomcat.state(server.host_int)) {
-                console.log(`Reiniciar ${server.name}`);
-            } else{
-                console.log('no reiniciar tomcat');
+        const { type, name, host_int } = server;
+
+        if (type === "Tomcat"){
+            if(await balancer.stateTomcat(host_int)) {
+                const tomcat = new Tomcat(server);
+                //tomcat.restartService();
+                //console.log(`Reiniciar ${name}`);
+                writeLog(name);
             }
         }
     });
+
 }
+
+
 
 main();
 

@@ -62,10 +62,5 @@ const server = [
         password: 'P=1q-alz'
     }];
     
-    
-    
-    module.exports = server ;
-
-
 
 module.exports = server ;

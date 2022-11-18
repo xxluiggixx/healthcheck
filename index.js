@@ -21,9 +21,9 @@ function main() {
 
         if (type === "Tomcat"){
             if(await balancer.stateTomcat(host_int)) {
-                const tomcat = new Tomcat(server);
-                tomcat.restartService();
-                //console.log(`Reiniciar ${name}`);
+                let tomcat = new Tomcat(server);
+                tomcat.restartTomcat();
+                console.log(`Reiniciar ${name}`);
                 writeLog(name);
             }
         }

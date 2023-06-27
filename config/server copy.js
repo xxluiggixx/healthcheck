@@ -9,7 +9,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_1',
+        name: 'Saplic-01',
         host: '10.19.240.41',
         host_int: '192.168.50.41',
         port: 22,
@@ -18,7 +18,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_2',
+        name: 'Saplic-02',
         host: '10.19.240.42',
         host_int: '192.168.50.42',
         port: 22,
@@ -27,7 +27,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_3',
+        name: 'Saplic-03',
         host: '10.19.240.43',
         host_int: '192.168.50.43',
         port: 22,
@@ -36,7 +36,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_4',
+        name: 'Saplic-04',
         host: '10.19.240.44',
         host_int: '192.168.50.44',
         port: 22,
@@ -45,7 +45,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_5',
+        name: 'Saplic-05',
         host: '10.19.240.45',
         host_int: '192.168.50.45',
         port: 22,
@@ -54,7 +54,7 @@ const server = [
     },
     {
         type: 'Tomcat',
-        name: 'Tomcat_6',
+        name: 'Saplic-06',
         host: '10.19.240.46',
         host_int: '192.168.50.46',
         port: 22,

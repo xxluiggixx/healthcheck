@@ -1,14 +1,15 @@
 const { Client } = require('ssh2');
+const {readFileSync} = require('fs');
 
 
-function command(cmd, server){
+function command(cmd, host){
     return new Promise((resolve, reject) => {
-
     const conn = new Client();
-    const { host, port, username, password } = server;
 
+    //const { host, port, username, password } = server;
+    console.log(`Trying connect to ${host}`);
     conn.on('ready', () => {
-            console.log('Client :: ready');
+            console.log(`Client ${host} :: ready`);
             conn.exec(cmd, (err, stream) => {
                 if (err) throw err;
                 stream.on('close', (code, signal) => {
@@ -20,10 +21,10 @@ function command(cmd, server){
                 resolve(data);     
                 });
             });
-        }).connect({host,
-                    port,
-                    username,
-                    password,
+        }).connect({host: host,
+                    port: 22,
+                    username: 'root',
+                    privateKey: readFileSync(process.env.PathPrivateKey),
                     algorithms: {
                         kex: [
                         "diffie-hellman-group1-sha1",

@@ -1,5 +1,5 @@
 {
-  "name": "tomcat-validate-nginx",
+  "name": "healcheck-nginx-tomcat",
   "version": "1.0.0",
   "description": "Tomcat http validate",
   "main": "index.js",
@@ -8,11 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@10.19.249.1:/home/git/tomcat-validate.git"
+    "url": ""
   },
   "author": "luis garcia",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "ssh2": "^1.11.0"
   },
   "devDependencies": {

@@ -12,38 +12,43 @@ class Balancer {
         this.tomcats = tomcats;
     }
 
-    async statusTomcat(){
-        const tomcatError = await this.tomcats.map(async (tomcat) =>{
-            if(tomcat.available){
-                const { host_int, port } = tomcat;
-                const CMD =`nc -zv ${host_int} ${port}`
-                try {
-                    let data = await command(CMD, this.host);
-                    data = data.toString('utf8').split(/[:]/);
-                    if (data[1]){
-                        return tomcat
-                    }
-                } catch (error) {
-                    console.error(error)
-                }
+    async statusTomcat() {
+        const tomcatError = [];
+        for (const tomcat of this.tomcats) {
+          if (tomcat.available) {
+            const { host, port } = tomcat;
+            const CMD = `nc -zv ${host} ${port}`;
+            try {
+              let data = await command(CMD, this.host);
+              data = data.toString('utf8').split(/[:]/);
+              if (data[1]) {
+                tomcatError.push(tomcat);
+              }
+            } catch (error) {
+              console.error(error);
             }
-        })
-        return tomcatError
-    }
+          }
+        }
+        return tomcatError;
+      }
+      
 
-    restartTomcat(tomcats){
-        const { host } = this.server;
-        //exec(`ssh ${host} "/root/tomcatService.sh"`);
-        exec(`bash /opt/Tools/tomcat-validate-nginx/restarttomcat.sh '${host}'`, (error, stdout, stderr) => {
+    restartTomcat(tomcat){
+        const { host } = tomcat;
+        
+        console.log(tomcat, host)
+        //exec(`ssh ${host} "${process.env.SERVICE_TOMCAT}"`);
+        //bash /opt/Tools/tomcat-validate-nginx/restarttomcat.sh '${host}'
+        exec(`ssh ${host} -i ${process.env.PathPrivateKey} "${process.env.SERVICE_TOMCAT}"`, (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
           return;
         }
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
-        writeLog()
+        writeLog(tomcat.name)
         });
-      }  
+    }  
 
 }
 

@@ -1,10 +1,10 @@
 const Balancer = require('./balancer');
-const Tomcat = require('./tomcat');
 const writeLog = require('./logs');
+const mail = require('./mail');
 
 
 module.exports = {
     Balancer,
-    Tomcat,
-    writeLog
+    mail,
+    writeLog,
 }

@@ -1,6 +1,9 @@
 
+const path = require('node:path');
+const fs = require('fs')
+
 const writeLog = (serverName)=>{
-    const PATH = '/var/log/tomcat-validate/IWS-Tomcat.log';
+    const PATH = path.join(`${path.resolve()}`,'logs/logs.log');
     let fecha = new Date();
     let message=`${fecha} se reincio el: ${serverName}\n`;
     fs.appendFile(PATH, message, (err) => {

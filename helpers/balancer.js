@@ -8,7 +8,6 @@ class Balancer {
         this.name = name;
         this.host = host;
         this.username = username;
-        this.port = port;
         this.tomcats = tomcats;
     }
 

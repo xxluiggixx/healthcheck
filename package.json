@@ -1,5 +1,5 @@
 {
-  "name": "healcheck-nginx-tomcat",
+  "name": "healthcheck-nginx-tomcat",
   "version": "1.0.0",
   "description": "Tomcat http validate",
   "main": "index.js",

@@ -24,9 +24,9 @@ const mail =  async (msg) => {
 
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: `"HealCheck Tomcat 🧨" ${process.env.SMTP_EMAIL_FROM}`, // sender address
+    from: `"HealCheck Tomcat ⏰" ${process.env.SMTP_EMAIL_FROM}`, // sender address
     to: process.env.SMTP_EMAIL_TO, // list of receivers
-    subject: `Tomcat has been reset`, // Subject line
+    subject: `Tomcat has been reset!!! 💣`, // Subject line
     text: `Tomcat <b>${msg}</b> has been restart at ${formattedDate}`, // plain text body
     html: `Tomcat <b>${msg}</b> has been restart at ${formattedDate}`, // html body
   });

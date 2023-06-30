@@ -9,7 +9,7 @@ function main() {
         const tomcatErrors = await balancer.statusTomcat();
         if(tomcatErrors.length !== 0 ){
             console.log(tomcatErrors)
-            let msg;
+            let msg ='';
             for(const tomcat of tomcatErrors){
                 msg += `- ${tomcat.name} \n`
                 balancer.restartTomcat(tomcat);

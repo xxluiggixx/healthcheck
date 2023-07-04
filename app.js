@@ -1,25 +1,25 @@
 require('dotenv').config()
-const servers = require('./config/servers');
-const { Balancer, mail } = require('./helpers');
+const hosts = require('./config/hosts');
+const { Server, mail } = require('./helpers');
+
+const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
 
 
-function main() {
-    servers.forEach( async (bal) => {
-        const balancer = new Balancer(bal);
-        const tomcatErrors = await balancer.statusTomcat();
-        if(tomcatErrors.length !== 0 ){
-            console.log(tomcatErrors)
-            let msg ='';
-            for(const tomcat of tomcatErrors){
-                msg += `- ${tomcat.name} \n`
-                balancer.restartTomcat(tomcat);
-            }
-            if(process.env.SMTP_ENABLE){
-                //send mail
-                await mail(msg);
-            }
+async function main() {
+    let msg = ''
+    for(const host of hosts){
+        const server = new Server(host);
+        const status = await server.statusServer()
+        console.log(`Status: ${status} del host ${server.name}`);
+        if(!status){
+            console.log(`Status: ${status}, reinciando ${server.name}`)
+            //server.restartService()
+            msg += `${server.name} \n`
         }
-    })
+    }
+    if((EMAIL_ENABLE === true) && (msg!='')){
+        await mail(msg);
+    }
 };
 
 main();

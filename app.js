@@ -10,10 +10,9 @@ async function main() {
     for(const host of hosts){
         const server = new Server(host);
         const status = await server.statusServer()
-        console.log(`Status: ${status} del host ${server.name}`);
         if(!status){
-            console.log(`Status: ${status}, reinciando ${server.name}`)
-            //server.restartService()
+            console.log(`Status: ${status}, restart service at host: ${server.name}`);
+            server.restartService()
             msg += `${server.name} \n`
         }
     }

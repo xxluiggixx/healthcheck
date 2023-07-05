@@ -8,6 +8,7 @@ Welcome to HealthCheck repository! This project is a software that checks if a p
 - Provides information about whether the port is open or not.
 - Can be easily integrated into existing scripts or used as a standalone tool.
 - Send notification via email (SMTP_ENABLE=true)
+- Stablish time healtcheck (TIME_INTERVAL=60000 mili sec)
 
 ## Pre-requirements
 
@@ -38,6 +39,7 @@ To install the software, follow these steps:
     ```
       PathPrivateKey=/path/to/private/key
       SERVICE_CMD="systemctl restart tomcat"
+      TIME_INTERVAL=60000
       ## <<<<<----Mail---->>>>>
       SMTP_ENABLE=true
       SMTP_EMAIL_FROM=servicio@example.com
@@ -50,17 +52,8 @@ To install the software, follow these steps:
       SMTP_PASSWORD=1234567
     ```
 
-4. Set up a cron job using crontab to schedule the desired task:
-
-    ```bash
-    crontab -e
-    ```
-
-    Add the following line to the crontab file to schedule the job:
-
-    ```
-    */1 * * * * /path/to/node /path/to/servers.js >> /path/to/logfile.log 2>&1
-    ```
+4. Set on .env file TIME_INTERVAL value. Default value 60000 = 1 min
+5. Recommend execute this program with pm2 enviroment 
 
 ## Usage
 

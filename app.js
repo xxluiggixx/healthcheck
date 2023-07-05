@@ -3,6 +3,7 @@ const hosts = require('./config/hosts');
 const { Server, mail } = require('./helpers');
 
 const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
+const TIME_INTERVAL = process.env.TIME_INTERVAL || 60000;
 
 
 async function main() {
@@ -21,4 +22,4 @@ async function main() {
     }
 };
 
-main();
+setInterval(main,TIME_INTERVAL);

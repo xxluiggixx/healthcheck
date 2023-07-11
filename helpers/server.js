@@ -3,6 +3,8 @@ const util = require('node:util');
 const  exec  = util.promisify(require('node:child_process').exec);
 const { writeLog } = require('./logs');
 
+const LOG_ENABLE = Boolean(process.env.LOG_ENABLE) || false;
+
 class Server {
     constructor(server) {
         const {name, host, username, port, available} = server
@@ -37,7 +39,9 @@ class Server {
         }
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
-        writeLog(this.name)
+        if(LOG_ENABLE){
+          writeLog(this.name);
+        }
         });
     }  
 

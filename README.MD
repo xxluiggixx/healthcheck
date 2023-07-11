@@ -37,10 +37,12 @@ To install the software, follow these steps:
 3. Create the config/hosts.js file and .env file with the required configuration. You can use the provided .env.example file as a template.
 
     ```
+      ##<<<< Software config >>>> 
       PathPrivateKey=/path/to/private/key
+      LOG_ENABLE=true  <by default is false>
       SERVICE_CMD="systemctl restart tomcat"
       TIME_INTERVAL=60000
-      ## <<<<<----Mail---->>>>>
+      ## <<<<<----Mail Config---->>>>>
       SMTP_ENABLE=true
       SMTP_EMAIL_FROM=servicio@example.com
       #multi dest

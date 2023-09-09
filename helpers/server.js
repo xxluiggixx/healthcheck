@@ -2,30 +2,43 @@
 const util = require('node:util');
 const  exec  = util.promisify(require('node:child_process').exec);
 const { writeLog } = require('./logs');
+const axios = require('axios');
+const { CLIENT_RENEG_LIMIT } = require('node:tls');
 
 const LOG_ENABLE = Boolean(process.env.LOG_ENABLE) || false;
 
 class Server {
     constructor(server) {
-        const {name, host, username, port, available} = server
+        const {name, host, username, port, available, url} = server
         this.name = name;
         this.host = host;
+        this.url = url;
         this.port = port;
         this.username = username;
         this.available = available;
     }
 
-    async statusServer() {
-          if (this.available){  
-            const CMD = `nc -zv ${this.host} ${this.port}`;
+    async status() {
+          if (this.available){
             try {
-              const { error, stdout, stderr } = await exec(CMD);
-              console.log(stderr);
-              return true;
+              const response = await axios({
+                headers: { Accept: 'text/html, application/json, text/plain, */*' },
+                url: this.url,
+                method: 'get'
+              })
+              console.log(response);
+              const {status} = response;
+              if(status && (status>=200 && status<300)){
+                console.log(`servidor ${this.name}:  OK`);
+                return true
+              }else{
+                console.log('Bad request');
+              }
+              
             } catch (error) {
-              //console.error(error);
-              return false;
-            }
+              console.log(`servidor ${this.name}:  ERROR`)
+              return false
+            }  
           }
           return true;
       }

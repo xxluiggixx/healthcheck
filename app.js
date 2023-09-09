@@ -10,7 +10,7 @@ async function main() {
     let msg = ''
     for(const host of hosts){
         const server = new Server(host);
-        const status = await server.statusServer()
+        const status = await server.status()
         if(!status){
             console.log(`Status: ${status}, restart service at host: ${server.name}`);
             server.restartService()

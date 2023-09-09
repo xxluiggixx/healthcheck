@@ -13,8 +13,6 @@ Welcome to HealthCheck repository! This project is a software that checks if a p
 
 Before using this software, please ensure that you have the following:
 
-- A Linux system to run the software.
-- The `netcat` package installed on your system.
 - ssh key pair installed.
 
 ## Installation

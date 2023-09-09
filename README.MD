@@ -1,11 +1,10 @@
 # HealthCheck
 
-Welcome to HealthCheck repository! This project is a software that checks if a port is open using the `nc` command. It provides a simple and straightforward way to verify the accessibility of a port on a given host.
+Welcome to HealthCheck repository! This project is a software that checks if a port is open by sending an HTTP request to the specified host and port. It provides a simple and straightforward way to verify the accessibility of a port on a given host.
 
 ## Features
 
-- Checks the availability of a specific port on a host using the `nc` command.
-- Provides information about whether the port is open or not.
+- Checks the availability of a specific port on a host by sending an HTTP request.
 - Can be easily integrated into existing scripts or used as a standalone tool.
 - Send notification via email (SMTP_ENABLE=true)
 - Stablish time healtcheck (TIME_INTERVAL=60000 mili sec)

@@ -3,7 +3,6 @@ const util = require('node:util');
 const  exec  = util.promisify(require('node:child_process').exec);
 const { writeLog } = require('./logs');
 const axios = require('axios');
-const { CLIENT_RENEG_LIMIT } = require('node:tls');
 
 const LOG_ENABLE = Boolean(process.env.LOG_ENABLE) || false;
 
@@ -26,13 +25,14 @@ class Server {
                 url: this.url,
                 method: 'get'
               })
-              console.log(response);
+              //console.log(response);
               const {status} = response;
               if(status && (status>=200 && status<300)){
                 console.log(`servidor ${this.name}:  OK`);
                 return true
               }else{
                 console.log('Bad request');
+                return false
               }
               
             } catch (error) {
@@ -50,8 +50,6 @@ class Server {
           console.error(`exec error: ${error}`);
           return;
         }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
         if(LOG_ENABLE){
           writeLog(this.name);
         }

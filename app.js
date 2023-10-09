@@ -16,7 +16,7 @@ async function main() {
         if(!status){
             console.error(`Status: ${status}, restart service at host: ${server.name} - ${date()}`);
             server.restartService()
-            msg += `${server.name} \n`
+            msg += `*${server.name}* `
         }
     }
     notification(msg);
@@ -27,7 +27,7 @@ const notification = async (msg) =>{
         await mail(msg);
     }
     if((SLACK_ENABLE) && (msg!='')){
-        slackSendMessage(`Tomcat <b>${msg}</b> has been restart at ${date()}`);
+        slackSendMessage(`${msg} has been restart at *${date()}*`);
     }
 }
 

@@ -7,6 +7,7 @@ Welcome to HealthCheck repository! This project is a software that checks if a p
 - Checks the availability of a specific port on a host by sending an HTTP request.
 - Can be easily integrated into existing scripts or used as a standalone tool.
 - Send notification via email (SMTP_ENABLE=true)
+- Send notification via slack (SLACK_ENABLE=true)
 - Stablish time healtcheck (TIME_INTERVAL=60000 mili sec)
 
 ## Pre-requirements
@@ -49,6 +50,9 @@ To install the software, follow these steps:
       SMTP_SECURE=false
       SMTP_USERNAME=servicio
       SMTP_PASSWORD=1234567
+      ## <<<<<----Slack Config---->>>>>
+      SLACK_ENABLE=true
+      URL_SLACK=https://hooks.slack.com/services/asdasdasdasdasdasdasdasd
     ```
 
 4. Set on .env file TIME_INTERVAL value. Default value 60000 = 1 min

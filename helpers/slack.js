@@ -3,7 +3,8 @@ const axios = require('axios');
 const slackSendMessage = async (msg) =>{
     const url = process.env.SLACK_URL;
     const payload = {
-    text: `${msg} :bomb:`
+        color: 'danger',
+        text: `${msg}`
     };
 
     axios.post(url, payload, {

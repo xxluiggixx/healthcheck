@@ -3,8 +3,14 @@ const axios = require('axios');
 const slackSendMessage = async (msg) =>{
     const url = process.env.SLACK_URL;
     const payload = {
-        color: 'danger',
-        text: `${msg}`
+        attachments: [{
+            mrkdwn_in:["text"],
+            color: 'danger',
+            text: `${msg}`,
+            title: 'Tomcat',
+            author_name: "healtcheck"
+        }]
+        
     };
 
     axios.post(url, payload, {
@@ -20,4 +26,4 @@ const slackSendMessage = async (msg) =>{
     });
 }
 
-module.exports = slackSendMessage;
+module.exports =   { slackSendMessage }; 

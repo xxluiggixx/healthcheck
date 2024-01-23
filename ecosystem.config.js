@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name   : "healthcheck",
-    script : "./app.js",
+    script : "./main.js",
     watch: false,
   }]
 }

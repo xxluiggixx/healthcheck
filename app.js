@@ -1,13 +1,9 @@
-require('dotenv').config()
 const hosts = require('./config/hosts');
-const { Server, mail, date, slackSendMessage } = require('./helpers');
-
-const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
-const SLACK_ENABLE = Boolean(process.env.SLACK_ENABLE) || false;
-const TIME_INTERVAL = process.env.TIME_INTERVAL || 60000;
+const { Server, date, notification, Vsphere } = require('./helpers');
+const VSPHERE_ENABLE = Boolean(process.env.VSPHERE_ENABLE) || false;
 
 
-async function main() {
+async function app() {
     let msg = ''
     console.log(`#################### INICIO ${date()} ####################`)
     for(const host of hosts){
@@ -17,18 +13,25 @@ async function main() {
             console.error(`Status: ${status}, restart service at host: ${server.name} - ${date()}`);
             server.restartService()
             msg += `${server.name} `
+            if(VSPHERE_ENABLE){
+                const vm = new Vsphere();
+                const power_state = await vm.VmStatus(server.name);
+                console.log(power_state);
+                if (power_state == 'POWERED_ON'){
+                    msg += restart(status,server);
+                }
+            }else {
+                msg += restart(status,server)
+            }
         }
     }
     notification(msg);
 };
 
-const notification = async (msg) =>{
-    if((EMAIL_ENABLE) && (msg!='')){
-        await mail(msg);
-    }
-    if((SLACK_ENABLE) && (msg!='')){
-        slackSendMessage(`*${msg}* has been restart at *${date()}*`);
-    }
+const restart = (status, server) => {
+    console.error(`Status: ${status}, restart service at host: ${server.name} - ${date()}`);
+    server.restartService()
+    return `*${server.name}* `
 }
 
-setInterval(main,TIME_INTERVAL);
+module.exports = { app } ;

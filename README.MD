@@ -53,6 +53,11 @@ To install the software, follow these steps:
       ## <<<<<----Slack Config---->>>>>
       SLACK_ENABLE=true
       URL_SLACK=https://hooks.slack.com/services/asdasdasdasdasdasdasdasd
+      ## <<<<<----Vsphere Config---->>>>>
+      VSPHERE_ENABLE=false
+      VSPHERE_ENDPOINT=vcenter.com
+      USERNAME=admin
+      PASS=12345
     ```
 
 4. Set on .env file TIME_INTERVAL value. Default value 60000 = 1 min

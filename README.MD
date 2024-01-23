@@ -1,4 +1,4 @@
-# HealthCheck
+# HealthCheck (1.4.0)
 
 Welcome to HealthCheck repository! This project is a software that checks if a port is open by sending an HTTP request to the specified host and port. It provides a simple and straightforward way to verify the accessibility of a port on a given host.
 

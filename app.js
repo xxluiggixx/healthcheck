@@ -15,7 +15,6 @@ async function app() {
                 const power_state = await vm.VmStatus(server.name);
                 console.log(power_state);
                 if (power_state == 'POWERED_ON'){
-                    console.log('Entro en la condicion POWERED_ON');
                     msg += restart(status,server);
                 }
             }else {
@@ -23,7 +22,6 @@ async function app() {
             }
         }
     }
-    console.log(`mensaje de notificacion: ${msg}`);
     notification(msg);
 };
 

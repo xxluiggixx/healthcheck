@@ -34,11 +34,5 @@ class Vsphere {
         return power_state;
     }
 }
-/* const test = async () => {
-    const vm = new Vsphere();
-    const state = await vm.VmStatus('IW-saplic01');
-    console.log(`VM State: ${state}`);
-}
-test() */
 
 module.exports = Vsphere;

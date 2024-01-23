@@ -1,10 +1,11 @@
+//require('dotenv').config()
 const axios = require('axios');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 class Vsphere {
     constructor(){
         this.endPoint = process.env.VSPHERE_ENDPOINT ;
-        this.user = process.env.USERNAME ;
-        this.pass = process.env.PASS ;
+        this.user = atob(process.env.USERNAME) ;
+        this.pass = atob(process.env.PASS) ;
     }
 
     async getToken(){
@@ -21,21 +22,23 @@ class Vsphere {
     async VmStatus(vmName){
         //Return status of VM (ON/OFF)
         const token = await this.getToken();
-        axios.get(`https://${this.endPoint}/rest/vcenter/vm`,{
-            params: {
-                'filter.names': vmName
-            },
-            headers:{
-                'vmware-api-session-id': token
-            }
-        })
-        .then(response =>{
-            return response.data.value[0]
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        const response = await axios.get(`https://${this.endPoint}/rest/vcenter/vm`,{
+                                            params: {
+                                                'filter.names': vmName
+                                            },
+                                            headers:{
+                                                'vmware-api-session-id': token
+                                            }
+                                        })
+        const { power_state } = response.data.value[0];
+        return power_state;
     }
 }
+/* const test = async () => {
+    const vm = new Vsphere();
+    const state = await vm.VmStatus('IW-saplic01');
+    console.log(`VM State: ${state}`);
+}
+test() */
 
 module.exports = Vsphere;

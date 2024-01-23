@@ -12,4 +12,4 @@ const date = () => {
     return formattedDate
 }
 
-module.exports = date;
+module.exports = {date};

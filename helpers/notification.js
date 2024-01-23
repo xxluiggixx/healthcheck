@@ -1,4 +1,5 @@
-const { mail, date } = require('./index');
+const { date } = require('./date');
+const { mail } = require('./mail');
 const { slackSendMessage} = require('./slack');
 const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
 const SLACK_ENABLE = Boolean(process.env.SLACK_ENABLE) || false;

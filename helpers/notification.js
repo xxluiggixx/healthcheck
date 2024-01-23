@@ -1,4 +1,4 @@
-const { mail, date, slackSendMessage } = require('./helpers');
+const { mail, date, slackSendMessage } = require('./index');
 const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
 const SLACK_ENABLE = Boolean(process.env.SLACK_ENABLE) || false;
 

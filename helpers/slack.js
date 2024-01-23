@@ -26,4 +26,4 @@ const slackSendMessage = async (msg) =>{
     });
 }
 
-module.exports = { slackSendMessage };
+module.exports =  slackSendMessage ;

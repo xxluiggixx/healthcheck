@@ -5,7 +5,7 @@ const VSPHERE_ENABLE = Boolean(process.env.VSPHERE_ENABLE) || false;
 
 async function app() {
     let msg = ''
-    console.log(`#################### INICIO ${date()} ####################`)
+    console.log(`#################### INICIO ${date} ####################`)
     for(const host of hosts){
         const server = new Server(host);
         const status = await server.status()
@@ -28,7 +28,7 @@ async function app() {
 };
 
 const restart = (status, server) => {
-    console.error(`Status: ${status}, restart service at host: ${server.name} - ${date()}`);
+    console.error(`Status: ${status}, restart service at host: ${server.name} - ${date}`);
     server.restartService()
     return `*${server.name}* `
 }

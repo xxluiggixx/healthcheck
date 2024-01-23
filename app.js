@@ -4,6 +4,7 @@ const { Server, mail, date, slackSendMessage } = require('./helpers');
 
 const EMAIL_ENABLE = Boolean(process.env.SMTP_ENABLE) || false;
 const SLACK_ENABLE = Boolean(process.env.SLACK_ENABLE) || false;
+const VSPHERE_ENABLE = Boolean(process.env.VSPHERE_ENABLE) || false;
 const TIME_INTERVAL = process.env.TIME_INTERVAL || 60000;
 
 
@@ -27,7 +28,15 @@ const notification = async (msg) =>{
         await mail(msg);
     }
     if((SLACK_ENABLE) && (msg!='')){
-        slackSendMessage(`${msg} has been restart at *${date()}*`);
+        if((VSPHERE_ENABLE)){
+            const vm = new Vsphere();
+            const {power_state} = vm;
+            if (power_state == 'POWERED_ON'){
+                slackSendMessage(`${msg} has been restart at *${date()}*`);
+            }
+        }else{
+            slackSendMessage(`${msg} has been restart at *${date()}*`);
+        }
     }
 }
 

@@ -3,6 +3,7 @@ const writeLog = require('./logs');
 const mail = require('./mail');
 const date = require('./date');
 const slackSendMessage = require('./slack');
+const Vsphere = require('./vsphere');
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     mail,
     writeLog,
     date,
-    slackSendMessage
+    slackSendMessage,
+    Vsphere
 }

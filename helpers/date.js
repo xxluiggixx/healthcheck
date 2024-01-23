@@ -1,6 +1,6 @@
 
 
-export function date(){
+export default function date(){
     const timestamp =new Date().getTime(); // Obtener el valor de tiempo en milisegundos
     const date = new Date(timestamp);
     const year = date.getFullYear(); // Obtener el año (por ejemplo, 2023)
@@ -11,5 +11,3 @@ export function date(){
     const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
     return formattedDate
 }
-
-export default date;

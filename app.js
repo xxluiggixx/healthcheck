@@ -1,5 +1,5 @@
 const hosts = require('./config/hosts');
-const { Server, date, notification } = require('./helpers');
+const { Server, date, notification, Vsphere } = require('./helpers');
 const VSPHERE_ENABLE = Boolean(process.env.VSPHERE_ENABLE) || false;
 
 

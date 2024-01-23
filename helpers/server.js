@@ -40,7 +40,7 @@ class Server {
       }
       
     restartService(){
-        exec(`ssh ${this.host} -i ${process.env.PathPrivateKey} "${process.env.SERVICE_CMD}"`, (error, stdout, stderr) => {
+        exec(`ssh ${this.host} -o StrictHostKeyChecking=no -i ${process.env.PathPrivateKey} "${process.env.SERVICE_CMD}"`, (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
           return;

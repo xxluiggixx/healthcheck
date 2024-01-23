@@ -25,5 +25,5 @@ const slackSendMessage = async (msg) =>{
         console.error('Error al enviar la solicitud a Slack:', error);
     });
 }
-
+//
 module.exports =   { slackSendMessage }; 

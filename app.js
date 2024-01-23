@@ -10,17 +10,19 @@ async function app() {
         const server = new Server(host);
         const status = await server.status()
         if(!status){
-            if((VSPHERE_ENABLE)){
+            if(VSPHERE_ENABLE){
                 const vm = new Vsphere();
                 const {power_state} = vm.VmStatus(server.name);
                 if (power_state == 'POWERED_ON'){
-                    msg += restart(status,server)
+                    console.log('Entro en la condicion POWERED_ON');
+                    msg += restart(status,server);
                 }
             }else {
                 msg += restart(status,server)
             }
         }
     }
+    console.log(`mensaje de notificacion: ${msg}`);
     notification(msg);
 };
 

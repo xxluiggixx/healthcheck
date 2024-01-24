@@ -10,9 +10,6 @@ async function app() {
         const server = new Server(host);
         const status = await server.status()
         if(!status){
-            console.error(`Status: ${status}, restart service at host: ${server.name} - ${date()}`);
-            server.restartService()
-            msg += `${server.name} `
             if(VSPHERE_ENABLE){
                 const vm = new Vsphere();
                 const power_state = await vm.VmStatus(server.name);

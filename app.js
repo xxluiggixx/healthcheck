@@ -12,7 +12,7 @@ async function app() {
         if(!status){
             if(VSPHERE_ENABLE){
                 const vm = new Vsphere();
-                const power_state = await vm.VmStatus(server.name);
+                const { power_state } = await vm.VmStatus(server.name);
                 console.log(power_state);
                 if (power_state == 'POWERED_ON'){
                     msg += restart(status,server);

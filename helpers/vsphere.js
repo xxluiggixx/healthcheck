@@ -1,6 +1,7 @@
 //require('dotenv').config()
 const axios = require('axios');
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+const { exec } = require('node:child_process');
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 class Vsphere {
     constructor(){
         this.endPoint = process.env.VSPHERE_ENDPOINT ;
@@ -30,8 +31,21 @@ class Vsphere {
                                                 'vmware-api-session-id': token
                                             }
                                         })
-        const { power_state } = response.data.value[0];
-        return power_state;
+        const data = response.data.value[0];
+        return data;
+    }
+
+    async VmReboot(vmId){
+        const token = await this.getToken();
+        exec(`curl --location --request POST 'https://${ this.endPoint }/api/vcenter/vm/${ vmId }/power?action=reset' \
+            --header 'vmware-api-session-id: ${ token }'`, (error, stdout, stderr) => {
+            if (error) {
+              console.error(`exec error: ${error}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
+        })
     }
 }
 
